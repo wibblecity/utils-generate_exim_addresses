@@ -78,7 +78,7 @@ log_event
 log_event "Task Started"
 log_event "Generating FROM addresses for local users using domain: ${DOMAIN_NAME}"
 
-USER_LIST="$(compgen -u)"
+USER_LIST="$(compgen -u | sort)"
 OUTPUT_CONTENT=""
 
 for USER_NAME in $(echo ${USER_LIST}) ; do
