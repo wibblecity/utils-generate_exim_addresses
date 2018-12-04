@@ -82,7 +82,7 @@ USER_LIST="$(compgen -u)"
 OUTPUT_CONTENT=""
 
 for USER_NAME in $(echo ${USER_LIST}) ; do
-  OUTPUT_CONTENT+="${USER_NAME}: ${USER_NAME}@${DOMAIN_NAME}"
+  OUTPUT_CONTENT+="${USER_NAME}: ${USER_NAME}@${DOMAIN_NAME}\n"
 done
 
 echo "${OUTPUT_CONTENT}"
