@@ -86,7 +86,19 @@ for USER_NAME in $(echo ${USER_LIST}) ; do
 "
 done
 
-echo "${OUTPUT_CONTENT}"
+CURRENT_CONTENT=""
+if [ -f "${TARGET_FILE}" ] ; then
+  CURRENT_CONTENT="$(cat "${TARGET_FILE}")"
+fi
+
+if [ "${CURRENT_CONTENT}" != "${OUTPUT_CONTENT}" ] ; then
+  TIME_STAMP="$(date "+%Y%m%d_%H%M%S")"
+  BACKUP_FILE_PATH="${TARGET_FILE}.backup.${TIME_STAMP}"
+  log_event "Backup up file: ${TARGET_FILE} to ${BACKUP_FILE_PATH}"
+  cp "${TARGET_FILE}" "${BACKUP_FILE_PATH}"
+  log_event "Writing generated content to file: ${TARGET_FILE}"
+  echo "${OUTPUT_CONTENT}" > ${TARGET_FILE}
+fi
 
 log_event "Updating Git workspace"
 cd "${SCRIPT_DIR}"
