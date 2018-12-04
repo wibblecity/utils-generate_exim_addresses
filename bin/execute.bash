@@ -90,9 +90,9 @@ echo "${OUTPUT_CONTENT}"
 
 log_event "Updating Git workspace"
 cd "${SCRIPT_DIR}"
-git pull -f -all >/dev/null
+git pull -f --all >/dev/null
 if [ "$?" -ne "0" ] ; then
-  usage "git pull -f -all command exited with errors"
+  usage "git pull -f --all command exited with errors"
 fi
 
 log_event "Task Complete"
