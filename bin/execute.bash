@@ -82,14 +82,17 @@ USER_LIST="$(compgen -u)"
 OUTPUT_CONTENT=""
 
 for USER_NAME in $(echo ${USER_LIST}) ; do
-  OUTPUT_CONTENT+="${USER_NAME}: ${USER_NAME}@${DOMAIN_NAME}\n"
+  OUTPUT_CONTENT+="${USER_NAME}: ${USER_NAME}@${DOMAIN_NAME}$'\n'"
 done
 
 echo "${OUTPUT_CONTENT}"
 
 log_event "Updating Git workspace"
 cd "${SCRIPT_DIR}"
-git pull -f >/dev/null
+git pull -f -all >/dev/null 2>/dev/null
+if [ "$?" -ne "0" ] ; then
+  usage "git pull -f -all command exited with errors"
+fi
 
 log_event "Task Complete"
 log_event
