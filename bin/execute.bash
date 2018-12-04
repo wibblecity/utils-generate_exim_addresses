@@ -74,9 +74,9 @@ if [ -z "${DOMAIN_NAME}" ] ; then
   usage "DOMAIN_NAME: variable is empty"
 fi
 
-log_event
-log_event "Task Started"
-log_event "Generating FROM addresses for local users using domain: ${DOMAIN_NAME}"
+### log_event
+### log_event "Task Started"
+### log_event "Generating FROM addresses for local users using domain: ${DOMAIN_NAME}"
 
 USER_LIST="$(compgen -u | sort)"
 OUTPUT_CONTENT=""
@@ -95,6 +95,7 @@ if [ -f "${TARGET_FILE}" ] ; then
 fi
 
 if [ "${CURRENT_CONTENT}" != "${OUTPUT_CONTENT}" ] ; then
+  log_event "Config change detected"
   TIME_STAMP="$(date "+%Y%m%d_%H%M%S")"
   BACKUP_FILE_PATH="${TARGET_FILE}.backup.${TIME_STAMP}"
   log_event "Backup up file: ${TARGET_FILE} to ${BACKUP_FILE_PATH}"
@@ -103,7 +104,7 @@ if [ "${CURRENT_CONTENT}" != "${OUTPUT_CONTENT}" ] ; then
   echo "${OUTPUT_CONTENT}" > ${TARGET_FILE}
 fi
 
-log_event "Updating Git workspace"
+### log_event "Updating Git workspace"
 cd "${SCRIPT_DIR}"
 git pull -f --all >/dev/null
 if [ "$?" -ne "0" ] ; then
