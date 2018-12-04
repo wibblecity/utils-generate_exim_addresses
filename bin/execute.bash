@@ -89,6 +89,8 @@ done
 CURRENT_CONTENT=""
 if [ -f "${TARGET_FILE}" ] ; then
   CURRENT_CONTENT="$(cat "${TARGET_FILE}")"
+  CURRENT_CONTENT+="
+"
 fi
 
 echo "${CURRENT_CONTENT}"
