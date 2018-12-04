@@ -91,6 +91,10 @@ if [ -f "${TARGET_FILE}" ] ; then
   CURRENT_CONTENT="$(cat "${TARGET_FILE}")"
 fi
 
+echo "${CURRENT_CONTENT}"
+echo "vs"
+echo "${OUTPUT_CONTENT}"
+
 if [ "${CURRENT_CONTENT}" != "${OUTPUT_CONTENT}" ] ; then
   TIME_STAMP="$(date "+%Y%m%d_%H%M%S")"
   BACKUP_FILE_PATH="${TARGET_FILE}.backup.${TIME_STAMP}"
