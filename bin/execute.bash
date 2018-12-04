@@ -82,7 +82,8 @@ USER_LIST="$(compgen -u | sort)"
 OUTPUT_CONTENT=""
 
 for USER_NAME in $(echo ${USER_LIST}) ; do
-  OUTPUT_CONTENT+="${USER_NAME}: ${USER_NAME}@${DOMAIN_NAME}
+  LOCAL_PART=$(echo "${USER_NAME}" | tr '[:upper:]' '[:lower:]')
+  OUTPUT_CONTENT+="${USER_NAME}: ${LOCAL_PART}@${DOMAIN_NAME}
 "
 done
 
