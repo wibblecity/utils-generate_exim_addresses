@@ -111,5 +111,5 @@ if [ "$?" -ne "0" ] ; then
   usage "git pull -f --all command exited with errors"
 fi
 
-log_event "Task Complete"
-log_event
+### log_event "Task Complete"
+### log_event
