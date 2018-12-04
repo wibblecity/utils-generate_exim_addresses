@@ -70,14 +70,22 @@ if [ ! -d "${SCRIPT_DIR}" ] ; then
   usage "SCRIPT_DIR: ${SCRIPT_DIR} does not exist or is not a directory"
 fi
 
+if [ -z "${DOMAIN_NAME}" ] ; then
+  usage "DOMAIN_NAME: variable is empty"
+fi
+
 log_event
 log_event "Task Started"
+log_event "Generating FROM addresses for local users using domain: ${DOMAIN_NAME}"
 
 USER_LIST="$(compgen -u)"
+OUTPUT_CONTENT=""
 
 for USER_NAME in $(echo ${USER_LIST}) ; do
-  echo "USER_NAME: ${USER_NAME}"
+  OUTPUT_CONTENT+="${USER_NAME}: ${USER_NAME}@${DOMAIN_NAME}"
 done
+
+echo "${OUTPUT_CONTENT}"
 
 log_event "Updating Git workspace"
 cd "${SCRIPT_DIR}"
