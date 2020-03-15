@@ -105,10 +105,12 @@ if [ "${CURRENT_CONTENT}" != "${OUTPUT_CONTENT}" ] ; then
 fi
 
 ### log_event "Updating Git workspace"
-cd "${SCRIPT_DIR}"
-git pull -f --all >/dev/null
-if [ "$?" -ne "0" ] ; then
-  usage "git pull -f --all command exited with errors"
+if [ ! -f /etc/git_control/auto_updates/utils-generate_exim_addresses.disabled ] ; then
+  cd "${SCRIPT_DIR}"
+  git pull -f --all >/dev/null
+  if [ "$?" -ne "0" ] ; then
+    usage "git pull -f --all command exited with errors"
+  fi
 fi
 
 ### log_event "Task Complete"
