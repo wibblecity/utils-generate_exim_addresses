@@ -105,7 +105,7 @@ if [ "${CURRENT_CONTENT}" != "${OUTPUT_CONTENT}" ] ; then
 fi
 
 ### log_event "Updating Git workspace"
-if [ ! -f /etc/git_control/auto_updates/utils-generate_exim_addresses.disabled ] ; then
+if [ -f /etc/git_control/auto_updates/utils-generate_exim_addresses.enabled ] ; then
   cd "${SCRIPT_DIR}"
   git pull -f --all >/dev/null
   if [ "$?" -ne "0" ] ; then
