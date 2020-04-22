@@ -1,10 +1,10 @@
 #!/bin/bash
 
+### variables ###
 DOMAIN_NAME="$1"
-
 TARGET_FILE="/etc/email-addresses"
-
 THIS_ARGS="$@"
+######
 
 ### functions
 function log_event {
@@ -74,10 +74,6 @@ if [ -z "${DOMAIN_NAME}" ] ; then
   usage "DOMAIN_NAME: variable is empty"
 fi
 
-### log_event
-### log_event "Task Started"
-### log_event "Generating FROM addresses for local users using domain: ${DOMAIN_NAME}"
-
 USER_LIST="$(compgen -u | sort)"
 OUTPUT_CONTENT=""
 
@@ -112,6 +108,3 @@ if [ -f /etc/git_control/auto_updates/utils-generate_exim_addresses.enabled ] ; 
     usage "git pull -f --all command exited with errors"
   fi
 fi
-
-### log_event "Task Complete"
-### log_event
